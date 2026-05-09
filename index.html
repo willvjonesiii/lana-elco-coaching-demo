@@ -537,31 +537,102 @@
     .courses-h2 em { font-style:italic; color:var(--gold-lt); }
     .courses-grid {
       display:grid; grid-template-columns:repeat(3,1fr);
-      gap:0; border:1px solid var(--border);
+      gap:1.5rem;
     }
     .course-card {
-      padding:2.2rem 2rem;
-      border-right:1px solid var(--border);
-      border-bottom:1px solid var(--border);
-      transition:background 0.4s;
+      position:relative; overflow:hidden;
+      height:280px;
+      display:flex; flex-direction:column; justify-content:flex-end;
     }
-    .course-card:nth-child(3n){ border-right:none; }
-    .course-card:nth-child(n+4){ border-bottom:none; }
-    .course-card:hover{ background:rgba(196,132,74,0.04); }
-    .course-sym { font-family:var(--font-serif); font-size:1.3rem; color:var(--gold); opacity:0.6; margin-bottom:1rem; }
+    .course-img {
+      position:absolute; inset:0;
+      background-size:cover; background-position:center;
+      transition:transform 0.85s ease;
+      filter:saturate(0.75) brightness(0.65);
+    }
+    .course-card:hover .course-img { transform:scale(1.06); }
+    .course-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top,
+        rgba(12,9,16,0.96) 0%,
+        rgba(12,9,16,0.45) 55%,
+        rgba(12,9,16,0.05) 100%);
+    }
+    .course-content {
+      position:relative; z-index:2;
+      padding:0 1.6rem 1.8rem;
+    }
+    .course-sym { font-family:var(--font-serif); font-size:1.1rem; color:var(--gold); opacity:0.7; margin-bottom:0.6rem; display:block; }
     .course-name {
       font-family:var(--font-serif);
-      font-size:1.2rem; font-style:italic; font-weight:400;
-      color:var(--cream); line-height:1.25; margin-bottom:0.75rem;
+      font-size:1.15rem; font-style:italic; font-weight:400;
+      color:var(--cream); line-height:1.2; margin-bottom:0.6rem;
     }
     .course-type {
-      font-family:var(--font-serif); font-size:0.58rem;
+      font-family:var(--font-serif); font-size:0.56rem;
       letter-spacing:0.22em; text-transform:uppercase;
-      color:var(--gold); opacity:0.7;
+      color:var(--gold); opacity:0.75;
     }
-    @media(max-width:900px){ .courses-grid{grid-template-columns:1fr 1fr;} .course-card:nth-child(3n){border-right:1px solid var(--border);} .course-card:nth-child(2n){border-right:none;} }
+    @media(max-width:900px){ .courses-grid{grid-template-columns:1fr 1fr;} }
     @media(max-width:560px){ .courses-grid{grid-template-columns:1fr;} }
 
+
+    /* ════════════════════════════
+       SUBSTACK
+    ════════════════════════════ */
+    #substack {
+      padding: clamp(5rem,12vw,9rem) clamp(1.5rem,5vw,4rem);
+    }
+    .substack-inner { max-width:1200px; margin:0 auto; }
+    .substack-card {
+      display:grid; grid-template-columns:1fr 1fr;
+      overflow:hidden; border:1px solid var(--border);
+    }
+    .substack-img {
+      position:relative; overflow:hidden; min-height:420px;
+    }
+    .substack-img img {
+      width:100%; height:100%; object-fit:cover; object-position:center;
+      filter:saturate(0.85) brightness(0.8);
+      transition:transform 0.8s ease;
+    }
+    .substack-card:hover .substack-img img { transform:scale(1.04); }
+    .substack-text {
+      background:var(--ink2); padding:3.5rem 3rem;
+      display:flex; flex-direction:column; justify-content:center;
+    }
+    .substack-platform {
+      font-family:var(--font-serif); font-size:0.62rem;
+      letter-spacing:0.28em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:1.2rem;
+      display:flex; align-items:center; gap:0.75rem;
+    }
+    .substack-platform::before { content:''; width:24px; height:1px; background:var(--gold); flex-shrink:0; }
+    .substack-title {
+      font-family:var(--font-serif);
+      font-size:clamp(1.6rem,3vw,2.4rem);
+      font-style:italic; font-weight:400;
+      color:var(--cream); line-height:1.2;
+      margin-bottom:1.5rem;
+    }
+    .substack-excerpt {
+      font-family:var(--font-serif);
+      font-size:1.05rem; font-style:italic; font-weight:300;
+      color:rgba(244,236,226,0.7); line-height:1.75;
+      margin-bottom:2rem;
+      border-left:2px solid var(--border);
+      padding-left:1.25rem;
+    }
+    .substack-cta {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      font-family:var(--font-serif); font-size:0.68rem;
+      letter-spacing:0.22em; text-transform:uppercase;
+      color:var(--gold); border-bottom:1px solid var(--border);
+      padding-bottom:3px; width:fit-content;
+      transition:border-color 0.3s, gap 0.3s;
+    }
+    .substack-cta:hover { border-color:var(--gold); gap:0.85rem; }
+    @media(max-width:768px){ .substack-card{grid-template-columns:1fr;} .substack-img{min-height:260px;} }
 
     /* ════════════════════════════
        VIDEO
@@ -849,7 +920,7 @@
       Love is your
       <em>Sacred Power.</em>
     </h1>
-    <p class="hero-tagline">Relationship · Intimacy · Feminine Leadership</p>
+    <p class="hero-tagline">Relationship, Intimacy,<br>Feminine Leadership</p>
     <div class="hero-ctas">
       <a href="https://www.lanaelcocoaching.com/" target="_blank" class="btn btn-primary">Schedule Your Private Call</a>
       <a href="#meet" class="btn btn-ghost">Discover the Work</a>
@@ -862,49 +933,14 @@
 </section>
 
 
-<!-- ══════════ PRESS — FORBES ══════════ -->
-<section id="press">
-  <div class="press-inner">
-    <div class="orn rv">
-      <div class="orn-line"></div>
-      <span class="orn-sym">✦</span>
-      <span class="label">As Featured In</span>
-    </div>
-    <div class="press-card rv rv-d1">
-      <div class="press-img">
-        <img
-          src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80"
-          alt="Forbes Magazine"
-        />
-        <div class="press-img-overlay"></div>
-      </div>
-      <div class="press-text">
-        <div class="forbes-wordmark">Forbes</div>
-        <div class="press-article-label">
-          <span class="label">Featured Expert · December 2020</span>
-        </div>
-        <div class="press-headline">"Am I Dating An Algorithm? Relationship Experts Weigh In On The Impacts Of AI"</div>
-        <div class="press-byline">By Annie Brown · Forbes.com</div>
-        <a href="https://www.forbes.com/sites/anniebrown/2020/12/10/am-i-dating-an-algorithm-relationship-experts-weigh-in-on-the-impacts-of-ai/" target="_blank" class="press-cta">Read the Article →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <!-- ══════════ MEET LANA ══════════ -->
 <section id="meet">
   <div class="meet-grid">
     <div class="meet-photos rv">
       <img
-        src="https://images.squarespace-cdn.com/content/v1/57400ccc1bbee0ad7c73144f/523bbf14-4862-4cd4-994f-b9e3cf65f09c/Background+picture+small.jpg?format=2500w"
+        src="https://images.squarespace-cdn.com/content/v1/57400ccc1bbee0ad7c73144f/f840f055-0066-4f2c-9294-3f08710e2388/IMG_2032.jpeg?format=750w"
         alt="Lana Elco"
         class="meet-photo-main"
-      />
-      <img
-        src="https://images.squarespace-cdn.com/content/v1/57400ccc1bbee0ad7c73144f/7b0a9776-9ca0-48a8-884c-ad18a0fd06a8/Luxe+Sacred+Union+7.jpeg"
-        alt="Lana Elco — Sacred Union Work"
-        class="meet-photo-secondary"
       />
     </div>
     <div class="meet-text">
@@ -950,6 +986,36 @@
   <span class="divider-sym">✿</span>
   <div class="divider-line"></div>
 </div>
+
+
+<!-- ══════════ PRESS — FORBES ══════════ -->
+<section id="press">
+  <div class="press-inner">
+    <div class="orn rv">
+      <div class="orn-line"></div>
+      <span class="orn-sym">✦</span>
+      <span class="label">As Featured In</span>
+    </div>
+    <div class="press-card rv rv-d1">
+      <div class="press-img">
+        <img
+          src="https://imageio.forbes.com/specials-images/imageserve/5fd27ebadc275abe8f1502a8/Lana-Elco/960x0.jpg?format=jpg&width=1440"
+          alt="Lana Elco — Forbes"
+        />
+        <div class="press-img-overlay"></div>
+      </div>
+      <div class="press-text">
+        <div class="forbes-wordmark">Forbes</div>
+        <div class="press-article-label">
+          <span class="label">Featured Expert · December 2020</span>
+        </div>
+        <div class="press-headline">"Am I Dating An Algorithm? Relationship Experts Weigh In On The Impacts Of AI"</div>
+        <div class="press-byline">By Annie Brown · Forbes.com</div>
+        <a href="https://www.forbes.com/sites/anniebrown/2020/12/10/am-i-dating-an-algorithm-relationship-experts-weigh-in-on-the-impacts-of-ai/" target="_blank" class="press-cta">Read the Article →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <!-- ══════════ SERVICES ══════════ -->
@@ -1105,38 +1171,86 @@
     </div>
     <div class="courses-grid">
       <div class="course-card rv rv-d1">
-        <div class="course-sym">∞</div>
-        <div class="course-name">The Lovers Code</div>
-        <span class="course-type">Self-Study Course</span>
+        <div class="course-img" style="background-image:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80')"></div>
+        <div class="course-overlay"></div>
+        <div class="course-content">
+          <span class="course-sym">∞</span>
+          <div class="course-name">The Lovers Code</div>
+          <span class="course-type">Self-Study Course</span>
+        </div>
       </div>
       <div class="course-card rv rv-d1">
-        <div class="course-sym">✦</div>
-        <div class="course-name">Tantric Intimacy Course</div>
-        <span class="course-type">Online Course</span>
+        <div class="course-img" style="background-image:url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80')"></div>
+        <div class="course-overlay"></div>
+        <div class="course-content">
+          <span class="course-sym">✦</span>
+          <div class="course-name">Tantric Intimacy Course</div>
+          <span class="course-type">Online Course</span>
+        </div>
       </div>
       <div class="course-card rv rv-d2">
-        <div class="course-sym">✿</div>
-        <div class="course-name">Surrender &amp; Alignment Workshop</div>
-        <span class="course-type">Workshop</span>
+        <div class="course-img" style="background-image:url('https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=600&q=80')"></div>
+        <div class="course-overlay"></div>
+        <div class="course-content">
+          <span class="course-sym">✿</span>
+          <div class="course-name">Surrender &amp; Alignment Workshop</div>
+          <span class="course-type">Workshop</span>
+        </div>
       </div>
       <div class="course-card rv rv-d2">
-        <div class="course-sym">·</div>
-        <div class="course-name">Energetic Communication Training</div>
-        <span class="course-type">Training</span>
+        <div class="course-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80')"></div>
+        <div class="course-overlay"></div>
+        <div class="course-content">
+          <span class="course-sym">·</span>
+          <div class="course-name">Energetic Communication Training</div>
+          <span class="course-type">Training</span>
+        </div>
       </div>
       <div class="course-card rv rv-d3">
-        <div class="course-sym">✦</div>
-        <div class="course-name">Tantric Activations Bundle</div>
-        <span class="course-type">Audio Bundle</span>
+        <div class="course-img" style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80')"></div>
+        <div class="course-overlay"></div>
+        <div class="course-content">
+          <span class="course-sym">✦</span>
+          <div class="course-name">Tantric Activations Bundle</div>
+          <span class="course-type">Audio Bundle</span>
+        </div>
       </div>
       <div class="course-card rv rv-d3">
-        <div class="course-sym">∞</div>
-        <div class="course-name">Breath of Remembrance</div>
-        <span class="course-type">Breathwork Journey</span>
+        <div class="course-img" style="background-image:url('https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=600&q=80')"></div>
+        <div class="course-overlay"></div>
+        <div class="course-content">
+          <span class="course-sym">∞</span>
+          <div class="course-name">Breath of Remembrance</div>
+          <span class="course-type">Breathwork Journey</span>
+        </div>
       </div>
     </div>
     <div style="margin-top:2.5rem;" class="rv rv-d4">
       <a href="https://www.lanaelcocoaching.com/" target="_blank" class="btn btn-ghost">Browse All Courses →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ SUBSTACK ══════════ -->
+<section id="substack">
+  <div class="substack-inner">
+    <div class="orn rv"><div class="orn-line"></div><span class="orn-sym">✦</span><span class="label">From the Journal</span></div>
+    <div class="substack-card rv rv-d1">
+      <div class="substack-img">
+        <img
+          src="https://substackcdn.com/image/fetch/$s_!6Gem!,w_1360,c_limit,f_webp,q_auto:best,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ef3291f-0bab-4d47-927e-d6e682290e23_1170x780.png"
+          alt="When Attraction Lies — Lana Elco"
+        />
+      </div>
+      <div class="substack-text">
+        <div class="substack-platform">Substack · lanaelco</div>
+        <div class="substack-title">"When Attraction Lies…"</div>
+        <div class="substack-excerpt">
+          There is a conversation in the relational world that has become almost cliché: "You attract partners who mirror your wounds." But there is a deeper layer that is far more subtle, and far more confronting. What if the people we choose are not simply feeding our wounds? What if we genuinely like them? What if we are not victims of attraction but loyalists to familiarity?
+        </div>
+        <a href="https://lanaelco.substack.com/p/when-attraction-lies" target="_blank" class="substack-cta">Read on Substack →</a>
+      </div>
     </div>
   </div>
 </section>
