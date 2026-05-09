@@ -109,11 +109,17 @@
       border-bottom: 1px solid var(--border);
     }
     .nav-brand {
+      display: flex; align-items: center; gap: 0.6rem;
       font-family: var(--font-serif);
       font-size: 1.2rem; font-weight:400; letter-spacing:0.05em;
       color: var(--cream);
     }
     .nav-brand em { font-style:italic; color:var(--gold); }
+    .nav-logo {
+      width: 36px; height: 36px;
+      object-fit: contain; flex-shrink: 0;
+      filter: drop-shadow(0 0 6px rgba(196,132,74,0.4));
+    }
     .nav-links { display:flex; gap:2rem; list-style:none; }
     .nav-links a {
       font-family: var(--font-serif);
@@ -1028,7 +1034,10 @@
 
 <!-- ══════════ NAVBAR ══════════ -->
 <nav id="navbar">
-  <a href="#hero" class="nav-brand">Lana <em>Elco</em></a>
+  <a href="#hero" class="nav-brand">
+    <img src="LanaElco_Logo_Lg.webp" alt="" class="nav-logo" />
+    Lana <em>Elco</em>
+  </a>
   <ul class="nav-links">
     <li><a href="#meet">About</a></li>
     <li><a href="#services">Services</a></li>
