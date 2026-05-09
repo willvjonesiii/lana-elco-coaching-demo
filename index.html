@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lana Elco — Mystic Strategist &amp; Intimacy Artist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:       #0c0910;
+      --ink2:      #18101f;
+      --gold:      #c4844a;
+      --gold-lt:   #d9a87a;
+      --rose:      #c8a49a;
+      --cream:     #f4ece2;
+      --cream2:    #faf6f0;
+      --muted:     #7a6878;
+      --border:    rgba(196, 132, 74, 0.25);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'DM Sans', system-ui, sans-serif;
+      --font-mono:  'Courier Prime', 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ── Custom Cursor ── */
+    * { cursor: none !important; }
+    #cursor {
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.15s ease;
+    }
+    #cursor-ring {
+      width: 38px; height: 38px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.5;
+      transition: all 0.35s ease;
+    }
+
+    /* ── Typography Helpers ── */
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; line-height: 1.1; }
+
+    em, i { font-style: italic; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: none !important;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--ink);
+    }
+    .btn-primary:hover { background: var(--gold-lt); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── Scroll Reveal ── */
+    .rv {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+    .rv.visible { opacity: 1; transform: none; }
+    .rv-delay-1 { transition-delay: 0.1s; }
+    .rv-delay-2 { transition-delay: 0.22s; }
+    .rv-delay-3 { transition-delay: 0.36s; }
+    .rv-delay-4 { transition-delay: 0.5s; }
+
+    /* ── Noise Texture ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+    }
+
+
+    /* ════════════════════════════════
+       NAVBAR
+    ════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(12, 9, 16, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+    }
+    .nav-brand span { font-style: italic; color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244, 236, 226, 0.7);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 0.55rem 1.3rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: none !important; }
+    .nav-hamburger span { width: 24px; height: 1px; background: var(--cream); transition: all 0.3s; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.squarespace-cdn.com/content/v1/57400ccc1bbee0ad7c73144f/523bbf14-4862-4cd4-994f-b9e3cf65f09c/Background+picture+small.jpg?format=2500w');
+      background-size: cover;
+      background-position: center 20%;
+      transform: scale(1.05);
+      animation: heroZoom 14s ease-out forwards;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.0); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(12, 9, 16, 0.97) 0%,
+        rgba(12, 9, 16, 0.65) 40%,
+        rgba(12, 9, 16, 0.3) 70%,
+        rgba(12, 9, 16, 0.15) 100%
+      );
+    }
+    .hero-overlay-left {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(12, 9, 16, 0.6) 0%,
+        transparent 60%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+      max-width: 760px;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .hero-h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 400;
+      line-height: 0.95;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 1s ease 0.45s both;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--gold-lt);
+      display: block;
+    }
+    .hero-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      font-weight: 300;
+      color: rgba(244, 236, 226, 0.75);
+      max-width: 460px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 1s ease 0.65s both;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      animation: fadeUp 1s ease 0.85s both;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      right: clamp(1.5rem, 5vw, 4rem);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: fadeUp 1s ease 1.2s both;
+    }
+    .hero-scroll span {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(244, 236, 226, 0.4);
+      writing-mode: vertical-rl;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.5; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+
+    /* ════════════════════════════════
+       PRESS STRIP
+    ════════════════════════════════ */
+    #press {
+      background: var(--ink2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem clamp(1.5rem, 5vw, 4rem);
+    }
+    .press-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .press-eyebrow {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .forbes-feature {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      align-items: center;
+      background: rgba(196, 132, 74, 0.06);
+      border: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .forbes-logo {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .forbes-logo em { color: var(--gold); font-style: normal; }
+    .forbes-text {}
+    .forbes-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .forbes-headline {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.4;
+      margin-bottom: 0.75rem;
+    }
+    .forbes-byline {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .forbes-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: border-color 0.3s;
+    }
+    .forbes-link:hover { border-color: var(--gold); }
+
+
+    /* ════════════════════════════════
+       MARQUEE TICKER
+    ════════════════════════════════ */
+    .marquee-wrap {
+      overflow: hidden;
+      background: var(--gold);
+      padding: 0.9rem 0;
+      border-top: 1px solid rgba(244, 236, 226, 0.15);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      white-space: nowrap;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 0 2rem;
+      flex-shrink: 0;
+    }
+    .marquee-sep {
+      font-size: 0.8rem;
+      color: rgba(12, 9, 16, 0.4);
+      flex-shrink: 0;
+      padding: 0 0.5rem;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+
+    /* ════════════════════════════════
+       MEET LANA
+    ════════════════════════════════ */
+    #meet {
+      padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .meet-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+    }
+    .meet-photo-wrap {
+      position: relative;
+    }
+    .meet-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: grayscale(15%) contrast(1.05);
+    }
+    .meet-photo-frame {
+      position: absolute;
+      inset: -1.5rem -1.5rem 1.5rem 1.5rem;
+      border: 1px solid var(--border);
+      z-index: -1;
+    }
+    .meet-photo-caption {
+      position: absolute;
+      bottom: -1.2rem;
+      left: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meet-text {}
+    .meet-h2 {
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      margin-bottom: 1rem;
+      color: var(--cream);
+    }
+    .meet-h2 em { color: var(--gold-lt); display: block; }
+    .meet-title {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+    }
+    .meet-blockquote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.5;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.5rem;
+      margin: 2rem 0;
+    }
+    .meet-bio {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(244, 236, 226, 0.72);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+    .meet-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2.2rem;
+    }
+    .meet-tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid rgba(122, 104, 120, 0.35);
+      padding: 0.35rem 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .meet-grid { grid-template-columns: 1fr; }
+      .meet-photo-frame { display: none; }
+    }
+
+
+    /* ════════════════════════════════
+       SERVICES
+    ════════════════════════════════ */
+    #services {
+      background: var(--ink2);
+      padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+      border-top: 1px solid var(--border);
+    }
+    .services-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+      max-width: 600px;
+    }
+    .section-h2 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--cream);
+      margin-top: 0.75rem;
+    }
+    .section-h2 em { color: var(--gold-lt); }
+    .section-sub {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(244, 236, 226, 0.6);
+      margin-top: 1rem;
+      line-height: 1.75;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .service-card {
+      background: var(--ink2);
+      padding: 2.5rem 2rem;
+      transition: background 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(196,132,74,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-num {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .service-icon {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+    .service-name {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .service-name em { color: var(--gold-lt); }
+    .service-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(244, 236, 226, 0.6);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .service-link {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: border-color 0.3s, gap 0.3s;
+    }
+    .service-link:hover { border-color: var(--gold); gap: 0.85rem; }
+
+    @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } }
+
+
+    /* ════════════════════════════════
+       FEATURED OFFERING
+    ════════════════════════════════ */
+    #featured {
+      padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .featured-visual {
+      position: relative;
+    }
+    .featured-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      object-position: center 25%;
+      filter: saturate(0.85) contrast(1.08);
+    }
+    .featured-badge {
+      position: absolute;
+      top: 1.5rem;
+      left: -1rem;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+    }
+    .featured-text {}
+    .featured-h2 {
+      font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+      color: var(--cream);
+      margin: 0.75rem 0 1.5rem;
+      line-height: 1.05;
+    }
+    .featured-h2 em { color: var(--gold-lt); display: block; }
+    .featured-includes {
+      list-style: none;
+      margin: 1.5rem 0 2rem;
+    }
+    .featured-includes li {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(244, 236, 226, 0.7);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(196, 132, 74, 0.12);
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+    .featured-includes li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+    }
+    .featured-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .featured-grid { grid-template-columns: 1fr; }
+    }
+
+
+    /* ════════════════════════════════
+       SELF-STUDY / COURSES
+    ════════════════════════════════ */
+    #courses {
+      background: var(--ink2);
+      border-top: 1px solid var(--border);
+      padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    }
+    .courses-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: clamp(3rem, 6vw, 5rem);
+    }
+    .course-card {
+      border: 1px solid var(--border);
+      padding: 2rem 1.75rem;
+      position: relative;
+      transition: border-color 0.3s;
+    }
+    .course-card:hover { border-color: var(--gold); }
+    .course-sym {
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      opacity: 0.65;
+    }
+    .course-name {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .course-desc {
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .course-type {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.75;
+    }
+
+    @media (max-width: 900px) { .courses-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .courses-grid { grid-template-columns: 1fr; } }
+
+
+    /* ════════════════════════════════
+       VIDEO SECTION
+    ════════════════════════════════ */
+    #video {
+      padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .video-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .video-h2 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      color: var(--cream);
+      margin-top: 0.75rem;
+    }
+    .video-h2 em { color: var(--gold-lt); }
+    .video-embed-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .video-embed-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .video-caption {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+
+    /* ════════════════════════════════
+       TESTIMONIALS
+    ════════════════════════════════ */
+    #testimonials {
+      background: var(--ink2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    }
+    .testimonials-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .testimonials-header {
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+    .testimonials-h2 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--cream);
+      margin-top: 0.75rem;
+    }
+    .testimonials-h2 em { color: var(--gold-lt); }
+
+    .testi-hero {
+      background: rgba(196, 132, 74, 0.06);
+      border-left: 3px solid var(--gold);
+      padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .testi-hero-quote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+    .testi-hero-quote::before { content: '\201C'; color: var(--gold); }
+    .testi-hero-quote::after  { content: '\201D'; color: var(--gold); }
+    .testi-attribution {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .testi-card {
+      background: var(--ink2);
+      padding: 2rem 1.75rem;
+    }
+    .testi-quote {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(244, 236, 226, 0.85);
+      line-height: 1.65;
+      margin-bottom: 1.2rem;
+    }
+    .testi-name {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .testi-loc {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    @media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .testi-grid { grid-template-columns: 1fr; } }
+
+
+    /* ════════════════════════════════
+       QUIZ / ARCHETYPE CTA
+    ════════════════════════════════ */
+    #quiz-cta {
+      padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .quiz-h2 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: var(--cream);
+      margin: 0.75rem 0 1.2rem;
+      line-height: 1.1;
+    }
+    .quiz-h2 em { color: var(--gold-lt); }
+    .quiz-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(244, 236, 226, 0.65);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+    .quiz-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+
+    /* ════════════════════════════════
+       CTA BAND
+    ════════════════════════════════ */
+    #cta-band {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+      background: var(--ink2);
+      border-top: 1px solid var(--border);
+    }
+    .cta-band-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.squarespace-cdn.com/content/v1/57400ccc1bbee0ad7c73144f/523bbf14-4862-4cd4-994f-b9e3cf65f09c/Background+picture+small.jpg?format=2500w');
+      background-size: cover;
+      background-position: center 35%;
+      opacity: 0.12;
+    }
+    .cta-band-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .cta-band-h2 {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      color: var(--cream);
+      line-height: 1.05;
+      margin: 0.75rem 0 1.5rem;
+    }
+    .cta-band-h2 em { color: var(--gold-lt); display: block; }
+    .cta-band-sub {
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-style: italic;
+      color: rgba(244, 236, 226, 0.6);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .cta-band-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid var(--border);
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem) 2rem;
+      border-radius: 3rem 3rem 0 0;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .footer-brand-name {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .footer-brand-name em { font-style: italic; color: var(--gold-lt); }
+    .footer-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .footer-bio {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(244, 236, 226, 0.5);
+      line-height: 1.75;
+      max-width: 300px;
+    }
+    .footer-col-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .footer-links a {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(244, 236, 226, 0.55);
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-contact a {
+      font-size: 0.88rem;
+      color: rgba(244, 236, 226, 0.55);
+      display: block;
+      margin-bottom: 0.4rem;
+      transition: color 0.3s;
+    }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-socials {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .footer-social {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(244, 236, 226, 0.45);
+      transition: color 0.3s;
+    }
+    .footer-social:hover { color: var(--gold); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: rgba(244, 236, 226, 0.3);
+    }
+    .footer-sig {
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(244, 236, 226, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+
+    /* ════════════════════════════════
+       DIVIDER ORNAMENT
+    ════════════════════════════════ */
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 0 2rem;
+    }
+    .ornament span {
+      font-size: 0.85rem;
+      color: var(--gold);
+      opacity: 0.6;
+    }
+    .ornament-line {
+      height: 1px;
+      width: 40px;
+      background: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+
+<!-- ════════════ NAVBAR ════════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">Lana <span>Elco</span></a>
+  <ul class="nav-links">
+    <li><a href="#meet">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#cta-band">Contact</a></li>
+  </ul>
+  <a href="https://www.lanaelcocoaching.com/" target="_blank" class="nav-cta">Schedule a Call</a>
+  <button class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- ════════════ HERO ════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-left"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Mystic Strategist · Intimacy Artist · Feminine Leader</div>
+    <h1 class="hero-h1">
+      Love is your
+      <em>Sacred Power.</em>
+    </h1>
+    <p class="hero-sub">
+      Relationship · Intimacy · Feminine Leadership
+    </p>
+    <div class="hero-ctas">
+      <a href="https://www.lanaelcocoaching.com/" target="_blank" class="btn btn-primary">Schedule Your Private Call</a>
+      <a href="#meet" class="btn btn-ghost">Discover the Work</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+
+<!-- ════════════ PRESS ════════════ -->
+<section id="press" class="rv">
+  <div class="press-inner">
+    <div class="press-eyebrow">
+      <span class="eyebrow">As Featured In</span>
+    </div>
+    <div class="forbes-feature rv rv-delay-1">
+      <div class="forbes-logo">F<em>o</em>rbes</div>
+      <div class="forbes-text">
+        <span class="forbes-label">Featured Expert · December 2020</span>
+        <div class="forbes-headline">"Am I Dating An Algorithm? Relationship Experts Weigh In On The Impacts Of AI"</div>
+        <div class="forbes-byline">By Annie Brown · Forbes.com</div>
+        <a href="https://www.forbes.com/sites/anniebrown/2020/12/10/am-i-dating-an-algorithm-relationship-experts-weigh-in-on-the-impacts-of-ai/" target="_blank" class="forbes-link">Read the Article →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ MARQUEE ════════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <!-- duplicated for seamless loop -->
+    <span class="marquee-item">Sacred Union Coaching</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Tantric Queen Program</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Feminine Leadership</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">The Intimate Universe</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Spiral of Synthesis™</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Somatic Intelligence</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Ancestral Lineage Work</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Tantric Activations</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Breathwork & Embodiment</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Conscious Relationships</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Sacred Union Coaching</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Tantric Queen Program</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Feminine Leadership</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">The Intimate Universe</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Spiral of Synthesis™</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Somatic Intelligence</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Ancestral Lineage Work</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Tantric Activations</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">Breathwork & Embodiment</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Conscious Relationships</span><span class="marquee-sep">·</span>
+  </div>
+</div>
+
+
+<!-- ════════════ MEET LANA ════════════ -->
+<section id="meet">
+  <div class="meet-grid">
+    <div class="meet-photo-wrap rv">
+      <!-- ⚠ SWAP: Replace with Lana's portrait photo -->
+      <img
+        src="https://images.squarespace-cdn.com/content/v1/57400ccc1bbee0ad7c73144f/523bbf14-4862-4cd4-994f-b9e3cf65f09c/Background+picture+small.jpg?format=2500w"
+        alt="Lana Elco"
+        class="meet-photo"
+      />
+      <div class="meet-photo-frame"></div>
+      <div class="meet-photo-caption">Lana Elco · Creator of The Intimate Universe</div>
+    </div>
+    <div class="meet-text">
+      <div class="ornament rv rv-delay-1">
+        <div class="ornament-line"></div>
+        <span>✦</span>
+      </div>
+      <span class="eyebrow rv rv-delay-1">Meet Lana</span>
+      <h2 class="meet-h2 rv rv-delay-2">
+        Oracular.
+        <em>Catalytic. Fiercely Loving.</em>
+      </h2>
+      <div class="meet-title rv rv-delay-2">Leader of the New Relational Paradigm</div>
+      <blockquote class="meet-blockquote rv rv-delay-3">
+        "Question the Obvious to Discover the Miraculous."
+      </blockquote>
+      <p class="meet-bio rv rv-delay-3">
+        Lana Elco is the leader of the New Relational Paradigm and the creator of the Spiral of Synthesis™ approach—a multidimensional framework for relational mastery, embodiment, and sacred leadership.
+      </p>
+      <p class="meet-bio rv rv-delay-3">
+        She guides her clients through spirals of awakening, unlayering, and integration—each one leading to a higher octave of love, leadership, and embodied truth.
+      </p>
+      <p class="meet-bio rv rv-delay-3">
+        Lana believes the time of collapsing under outdated relationship models is over. We are in a renaissance of conscious leadership and soul-aligned relational evolution.
+      </p>
+      <div class="meet-tags rv rv-delay-4">
+        <span class="meet-tag">Tantric Wisdom</span>
+        <span class="meet-tag">Somatic Intelligence</span>
+        <span class="meet-tag">Feminine Embodiment</span>
+        <span class="meet-tag">Sacred Intimacy</span>
+        <span class="meet-tag">Transpersonal Psychology</span>
+      </div>
+      <div class="rv rv-delay-4">
+        <a href="#services" class="btn btn-ghost">Explore the Work →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ SERVICES ════════════ -->
+<section id="services">
+  <div class="services-inner">
+    <div class="section-header rv">
+      <span class="eyebrow">1:1 Coaching &amp; Programs</span>
+      <h2 class="section-h2">
+        Three Pillars of
+        <em>Sacred Transformation</em>
+      </h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card rv rv-delay-1">
+        <span class="service-num">01</span>
+        <div class="service-icon">∞</div>
+        <h3 class="service-name">Sacred Union <em>Coaching</em></h3>
+        <p class="service-desc">
+          Discover Healing &amp; Intimate Arts of Tantra together with your soul partner, explore the dance of sexuality and spirituality weaved into the mystery of Life &amp; co-create your own unique intimate model of the Sacred Union.
+        </p>
+        <a href="https://www.lanaelcocoaching.com/" target="_blank" class="service-link">Inquire About This Path →</a>
+      </div>
+      <div class="service-card rv rv-delay-2">
+        <span class="service-num">02</span>
+        <div class="service-icon">✦</div>
+        <h3 class="service-name">The Tantric <em>Queen Program</em></h3>
+        <p class="service-desc">
+          Heal the Feminine within and your ancestral female lineage, activate your senses, rediscover your sexuality in alignment with the ancient spiritual principles. Master Tantric Feminine Arts &amp; Receiving powers.
+        </p>
+        <a href="https://www.lanaelcocoaching.com/" target="_blank" class="service-link">Inquire About This Path →</a>
+      </div>
+      <div class="service-card rv rv-delay-3">
+        <span class="service-num">03</span>
+        <div class="service-icon">✿</div>
+        <h3 class="service-name">Feminine Leadership <em>&amp; Entrepreneurship</em></h3>
+        <p class="service-desc">
+          Align with your unique leadership style based on your archetype &amp; connect with your soul purpose. Create a thriving business to share your genius and gifts with the world.
+        </p>
+        <a href="https://www.lanaelcocoaching.com/" target="_blank" class="service-link">Inquire About This Path →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ FEATURED OFFERING ════════════ -->
+<section id="featured">
+  <div class="featured-grid">
+    <div class="featured-visual rv">
+      <!-- ⚠ SWAP: Replace with a professional portrait of Lana -->
+      <img
+        src="https://images.squarespace-cdn.com/content/v1/57400ccc1bbee0ad7c73144f/523bbf14-4862-4cd4-994f-b9e3cf65f09c/Background+picture+small.jpg?format=2500w"
+        alt="Love Unlimited Program"
+        class="featured-img"
+      />
+      <div class="featured-badge">Signature Program</div>
+    </div>
+    <div class="featured-text">
+      <span class="eyebrow rv rv-delay-1">Deep Dive · 3 Months</span>
+      <h2 class="featured-h2 rv rv-delay-2">
+        Love
+        <em>Unlimited</em>
+      </h2>
+      <ul class="featured-includes rv rv-delay-3">
+        <li>Initial 2-hour deep-dive intensive</li>
+        <li>12 one-on-one monthly sessions</li>
+        <li>Welcome &amp; preparation packets</li>
+        <li>Breakthrough workbooks per module</li>
+        <li>Guided meditations &amp; somatic exercises</li>
+        <li><em>"Toxic Patterns in Relationships"</em> bonus module</li>
+        <li>Emergency session access</li>
+      </ul>
+      <div class="featured-ctas rv rv-delay-4">
+        <a href="https://www.lanaelcocoaching.com/" target="_blank" class="btn btn-primary">Schedule Your Free Discovery Call</a>
+        <a href="https://www.lanaelcocoaching.com/" target="_blank" class="btn btn-ghost">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ SELF-STUDY COURSES ════════════ -->
+<section id="courses">
+  <div class="courses-inner">
+    <div class="section-header rv">
+      <span class="eyebrow">Self-Study &amp; Activations</span>
+      <h2 class="section-h2">
+        Begin Your Journey
+        <em>At Your Own Pace</em>
+      </h2>
+    </div>
+    <div class="courses-grid">
+      <div class="course-card rv rv-delay-1">
+        <div class="course-sym">∞</div>
+        <div class="course-name">The Lovers Code</div>
+        <span class="course-type">Self-Study Course</span>
+      </div>
+      <div class="course-card rv rv-delay-1">
+        <div class="course-sym">✦</div>
+        <div class="course-name">Tantric Intimacy Course</div>
+        <span class="course-type">Online Course</span>
+      </div>
+      <div class="course-card rv rv-delay-2">
+        <div class="course-sym">✿</div>
+        <div class="course-name">Surrender &amp; Alignment Workshop</div>
+        <span class="course-type">Workshop</span>
+      </div>
+      <div class="course-card rv rv-delay-2">
+        <div class="course-sym">·</div>
+        <div class="course-name">Energetic Communication Training</div>
+        <span class="course-type">Training</span>
+      </div>
+      <div class="course-card rv rv-delay-3">
+        <div class="course-sym">✦</div>
+        <div class="course-name">Tantric Activations Bundle</div>
+        <span class="course-type">Audio Bundle</span>
+      </div>
+      <div class="course-card rv rv-delay-3">
+        <div class="course-sym">∞</div>
+        <div class="course-name">Breath of Remembrance</div>
+        <span class="course-type">Breathwork Journey</span>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;" class="rv rv-delay-4">
+      <a href="https://www.lanaelcocoaching.com/" target="_blank" class="btn btn-ghost">Browse All Courses &amp; Activations →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ VIDEO ════════════ -->
+<section id="video">
+  <div class="video-header rv">
+    <span class="eyebrow">Watch · The Sacred Feminine</span>
+    <h2 class="video-h2">
+      Devotion to
+      <em>Frequency</em>
+    </h2>
+  </div>
+  <div class="video-embed-wrap rv rv-delay-1">
+    <iframe
+      src="https://www.youtube.com/embed/0-9ff9oQYCk"
+      title="The Sacred Feminine: Devotion to Frequency — Lana Elco"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <div class="video-caption rv rv-delay-2">The Sacred Feminine: Devotion to Frequency · Lana Elco</div>
+</section>
+
+
+<!-- ════════════ TESTIMONIALS ════════════ -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header rv">
+      <span class="eyebrow">In Their Words</span>
+      <h2 class="testimonials-h2">
+        Lives
+        <em>Transformed</em>
+      </h2>
+    </div>
+
+    <div class="testi-hero rv rv-delay-1">
+      <div class="testi-hero-quote">
+        Lana is a true POWERHOUSE who can TRANSFORM YOUR LIFE beyond what you have ever thought possible.
+      </div>
+      <div class="testi-attribution">Iva Georgieva · Brand Strategist &amp; Business Coach, Indiana</div>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card rv rv-delay-1">
+        <div class="testi-quote">"She is simply the real deal! No other life coach is on her level."</div>
+        <div class="testi-name">Ivy Brown</div>
+        <div class="testi-loc">Real Estate Professional · Utah</div>
+      </div>
+      <div class="testi-card rv rv-delay-1">
+        <div class="testi-quote">"Lana's greatest gift is empowering others to trust themselves, to heal, and to grow beyond what they thought possible."</div>
+        <div class="testi-name">Miriam Card</div>
+        <div class="testi-loc">Entrepreneur · Salt Lake City, Utah</div>
+      </div>
+      <div class="testi-card rv rv-delay-2">
+        <div class="testi-quote">"She has an uncanny ability to lead people towards love and trust in their lives."</div>
+        <div class="testi-name">Leeza Pachepsky, PhD</div>
+        <div class="testi-loc">Holotropic Breathwork Facilitator</div>
+      </div>
+      <div class="testi-card rv rv-delay-2">
+        <div class="testi-quote">"My journey with Lana has been nothing short of transformational!"</div>
+        <div class="testi-name">Phili R.</div>
+        <div class="testi-loc">Health Care Professional · UK</div>
+      </div>
+      <div class="testi-card rv rv-delay-3">
+        <div class="testi-quote">"With Lana's help I feel like I have stepped into my feminine power and am so grateful for her beautiful soul."</div>
+        <div class="testi-name">Elicia Simon</div>
+        <div class="testi-loc">Health Coach · Ogden, Utah</div>
+      </div>
+      <div class="testi-card rv rv-delay-3">
+        <div class="testi-quote">"Now I trust myself more and follow my own intuition. I know what I want in my relationship and life."</div>
+        <div class="testi-name">Nadia Forgac</div>
+        <div class="testi-loc">San Francisco, California</div>
+      </div>
+      <div class="testi-card rv rv-delay-1">
+        <div class="testi-quote">"She has encouraged me to follow my heart and helped me make courageous decisions that opened my love life."</div>
+        <div class="testi-name">Lisa Magdalena</div>
+        <div class="testi-loc">Modern Psychotherapist · UK</div>
+      </div>
+      <div class="testi-card rv rv-delay-2">
+        <div class="testi-quote">"I feel like a newly polished multifaceted diamond! Life is Good!"</div>
+        <div class="testi-name">Svitlana Kline</div>
+        <div class="testi-loc">Artist &amp; Author · Atlanta, Georgia</div>
+      </div>
+      <div class="testi-card rv rv-delay-3">
+        <div class="testi-quote">"Her program will help you see and understand where your dysfunction comes from and why you repeat patterns."</div>
+        <div class="testi-name">Erica Castro</div>
+        <div class="testi-loc">Long Beach, California</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ QUIZ / ARCHETYPE ════════════ -->
+<section id="quiz-cta">
+  <div class="ornament rv" style="justify-content:center;">
+    <div class="ornament-line"></div>
+    <span>✦</span>
+    <div class="ornament-line"></div>
+  </div>
+  <span class="eyebrow rv" style="text-align:center;">Discover Your Archetype</span>
+  <h2 class="quiz-h2 rv rv-delay-1">
+    Which Feminine
+    <em>Archetype Are You?</em>
+  </h2>
+  <div class="quiz-ctas rv rv-delay-3">
+    <a href="https://www.lanaelcocoaching.com/" target="_blank" class="btn btn-primary">Take the Free Quiz →</a>
+  </div>
+</section>
+
+
+<!-- ════════════ CTA BAND ════════════ -->
+<section id="cta-band">
+  <div class="cta-band-bg"></div>
+  <div class="cta-band-inner">
+    <span class="eyebrow rv">Begin the Journey</span>
+    <h2 class="cta-band-h2 rv rv-delay-1">
+      Ready to step into
+      <em>your Intimate Universe?</em>
+    </h2>
+    <div class="cta-band-ctas rv rv-delay-3">
+      <a href="https://www.lanaelcocoaching.com/" target="_blank" class="btn btn-primary">Schedule Your Private Call</a>
+      <a href="mailto:lana@lanaelcocoaching.com" class="btn btn-ghost">lana@lanaelcocoaching.com</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Lana <em>Elco</em></div>
+        <div class="footer-tagline">Relationship · Intimacy · Feminine Leadership</div>
+        <p class="footer-bio">
+          Lana Elco is the leader of the New Relational Paradigm and the creator of the Spiral of Synthesis™ approach—a multidimensional framework for relational mastery, embodiment, and sacred leadership.
+        </p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/lana.elco/" target="_blank" class="footer-social">Instagram</a>
+          <a href="https://www.youtube.com/watch?v=0-9ff9oQYCk" target="_blank" class="footer-social">YouTube</a>
+          <a href="https://www.lanaelcocoaching.com/" target="_blank" class="footer-social">Facebook</a>
+          <a href="https://www.lanaelcocoaching.com/" target="_blank" class="footer-social">LinkedIn</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="#meet">About Lana</a></li>
+          <li><a href="#services">1:1 Coaching</a></li>
+          <li><a href="#featured">Love Unlimited</a></li>
+          <li><a href="#courses">Self-Study Courses</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#video">Watch</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Connect</div>
+        <div class="footer-contact">
+          <a href="mailto:lana@lanaelcocoaching.com">lana@lanaelcocoaching.com</a>
+          <a href="https://www.lanaelcocoaching.com/" target="_blank">Schedule a Private Call →</a>
+          <a href="https://go.lanaelcocoaching.com/" target="_blank">Member Portal →</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 Lana Elco Coaching · All Rights Reserved</div>
+      <div class="footer-sig">Question the Obvious to Discover the Miraculous.</div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // ── Custom Cursor ──
+  const cursor     = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursor-ring');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  (function animateCursor() {
+    cursor.style.transform     = `translate(${mx - 5}px, ${my - 5}px)`;
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.transform = `translate(${rx - 19}px, ${ry - 19}px)`;
+    requestAnimationFrame(animateCursor);
+  })();
+
+  document.querySelectorAll('a, button, .service-card, .course-card, .testi-card').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform += ' scale(2)'; cursorRing.style.opacity = '0'; });
+    el.addEventListener('mouseleave', () => { cursorRing.style.opacity = '0.5'; });
+  });
+
+  // ── Navbar scroll ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── Scroll Reveal ──
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
