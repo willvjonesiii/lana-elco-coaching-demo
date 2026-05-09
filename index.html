@@ -277,129 +277,129 @@
     #spiral {
       position: relative;
       min-height: 100dvh;
-      display: flex; align-items: center;
-      padding: 2.5rem clamp(1.5rem,5vw,4rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1.2rem,2.5vw,2rem);
+      padding: clamp(3rem,5vw,4.5rem) clamp(1.2rem,3vw,2.5rem);
       overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      background: #2d2926;
     }
-    .spiral-parallax-bg {
-      position: absolute; inset: 0;
-      background-image: url('https://images.squarespace-cdn.com/content/v1/57400ccc1bbee0ad7c73144f/523bbf14-4862-4cd4-994f-b9e3cf65f09c/Background+picture+small.jpg?format=2500w');
-      background-size: cover;
-      background-position: center 30%;
-      background-attachment: fixed;
-      opacity: 0.07;
-      z-index: 0;
-    }
-    .spiral-parallax-bg::after {
+    /* Vignette */
+    #spiral::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, transparent 30%, var(--ink) 100%);
+      background: radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(8,6,5,0.55) 100%);
+      pointer-events: none; z-index: 1;
     }
-    .spiral-inner {
+    /* Section header */
+    .spiral-header {
+      text-align: center;
       position: relative; z-index: 2;
-      max-width: 1160px; margin: 0 auto; width: 100%;
+    }
+    .spiral-header .orn { justify-content: center; margin-bottom: 1rem; }
+
+    /* ── 3-column stage ── */
+    .spiral-stage {
+      position: relative; z-index: 2;
+      width: 100%;
+      max-width: 1380px;
       display: grid;
-      grid-template-columns: min(44vh,420px) 1fr;
-      gap: clamp(2.5rem,5vw,5rem);
+      grid-template-columns: 1fr min(44vh,400px) 1fr;
+      gap: clamp(1rem,2.5vw,3rem);
       align-items: center;
     }
-    /* SVG wrap */
+    /* SVG center column */
     .spiral-svg-wrap {
       position: relative;
       width: 100%;
       aspect-ratio: 1/1;
-      flex-shrink: 0;
     }
     #spiralSvg { width:100%; height:100%; overflow:visible; }
 
-    /* Tooltips */
-    .spiral-tip {
-      position: absolute;
-      pointer-events: none;
+    /* Left column — right-aligned, slides in from left */
+    .spiral-left {
+      display: flex; flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-around;
+      min-height: min(44vh,400px);
+      gap: clamp(1.5rem,4vh,3.5rem);
+    }
+    /* Right column — left-aligned, slides in from right */
+    .spiral-right {
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-around;
+      min-height: min(44vh,400px);
+      gap: clamp(1rem,3vh,2.5rem);
+    }
+
+    /* Individual principle block */
+    .spiral-principle {
       opacity: 0;
-      transform: translateY(5px) scale(0.96);
-      transition: opacity 0.22s ease, transform 0.22s ease;
-      z-index: 20;
+      transition: opacity 0.9s ease, transform 0.9s ease;
     }
-    .spiral-tip.show { opacity:1; transform:none; }
-    .spiral-tip-inner {
-      background: rgba(12,9,16,0.95);
-      border: 1px solid var(--gold);
-      padding: 0.5rem 0.9rem;
-      white-space: nowrap;
+    .spiral-left .spiral-principle {
+      transform: translateX(-28px);
+      text-align: right;
+    }
+    .spiral-right .spiral-principle {
+      transform: translateX(28px);
+      text-align: left;
+    }
+    .spiral-principle.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .principle-num {
       font-family: var(--font-serif);
-      font-size: 0.78rem; font-style:italic; font-weight:300;
-      color: var(--cream);
+      font-size: 0.58rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+    .principle-name {
+      font-family: var(--font-serif);
+      font-size: clamp(1.25rem,1.9vw,2.1rem);
+      font-style: italic; font-weight: 300;
+      color: var(--cream); line-height: 1.2;
     }
 
-    /* Right panel */
-    .spiral-content {}
-    .spiral-h2 {
-      font-size: clamp(2rem,3.5vw,3.2rem);
-      font-weight:400; color:var(--cream);
-      line-height:1.05; margin: 0.6rem 0 1.4rem;
-    }
-    .spiral-h2 em { font-style:italic; color:var(--gold-lt); display:block; }
-    .spiral-body {
-      font-size: clamp(0.88rem,1.2vw,1rem);
-      font-weight:300; color:rgba(244,236,226,0.68);
-      line-height:1.85; margin-bottom:1.8rem;
-      max-width:500px;
-    }
-    .spiral-body em { font-style:italic; color:rgba(244,236,226,0.85); }
-
-    /* 5 elements list */
-    .spiral-elements {
-      list-style:none;
-      display:flex; flex-direction:column; gap:0.55rem;
-      margin-bottom:2rem;
-    }
-    .spiral-elem {
-      display:flex; align-items:center; gap:0.8rem;
-      opacity:0.22; transition: opacity 0.5s ease;
-    }
-    .spiral-elem.lit { opacity:1; }
-    .spiral-elem.active { opacity:1; }
-    .spiral-elem.active .elem-dot { background:var(--gold-lt); box-shadow:0 0 8px var(--gold); }
-    .spiral-elem.active .elem-name { color:var(--gold-lt); }
-    .elem-dot {
-      width:6px; height:6px; border-radius:50%;
-      background:var(--gold); flex-shrink:0;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-    .elem-name {
-      font-family:var(--font-serif);
-      font-size:clamp(0.85rem,1.2vw,1rem);
-      font-style:italic; font-weight:300; color:var(--cream);
-      transition: color 0.3s;
-    }
-
-    /* Pillars */
+    /* Pillars below stage */
     .spiral-pillars {
-      display:flex; gap:clamp(1.5rem,4vw,3rem); flex-wrap:wrap;
-      padding-top:1.5rem;
-      border-top:1px solid var(--border);
+      display: flex; gap: clamp(2rem,5vw,5rem);
+      flex-wrap: wrap; justify-content: center;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--border);
+      position: relative; z-index: 2;
+      width: 100%; max-width: 560px;
     }
     .spiral-pillar {
-      display:flex; flex-direction:column; gap:0.3rem;
-      opacity:0.2; transition: opacity 0.7s ease;
+      display: flex; flex-direction: column; gap: 0.25rem;
+      align-items: center; text-align: center;
+      opacity: 0.14; transition: opacity 0.7s ease;
     }
-    .spiral-pillar.lit { opacity:1; }
+    .spiral-pillar.lit { opacity: 1; }
     .pillar-num {
-      font-family:var(--font-serif); font-size:0.58rem;
-      letter-spacing:0.3em; text-transform:uppercase; color:var(--gold);
+      font-family: var(--font-serif); font-size: 0.58rem;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
     }
     .pillar-name {
-      font-family:var(--font-serif);
-      font-size:clamp(1rem,1.5vw,1.3rem);
-      font-style:italic; font-weight:300; color:var(--cream);
+      font-family: var(--font-serif);
+      font-size: clamp(0.9rem,1.3vw,1.15rem);
+      font-style: italic; font-weight: 300; color: var(--cream);
     }
 
     @media(max-width:860px){
-      .spiral-inner{grid-template-columns:1fr; }
-      .spiral-svg-wrap{width:min(55vw,300px);margin:0 auto;}
+      .spiral-stage { grid-template-columns: 1fr; gap: 1.5rem; }
+      .spiral-left, .spiral-right {
+        flex-direction: row; flex-wrap: wrap;
+        align-items: center; justify-content: center;
+        min-height: unset; gap: 1rem 1.5rem;
+      }
+      .spiral-left .spiral-principle, .spiral-right .spiral-principle { text-align: center; }
+      .spiral-svg-wrap { width: min(62vw,300px); margin: 0 auto; }
+      .principle-name { font-size: clamp(0.9rem,3.5vw,1.2rem); }
     }
 
     /* ════════════════════════════
@@ -1066,10 +1066,33 @@
 
 <!-- ══════════ SPIRAL OF SYNTHESIS ══════════ -->
 <section id="spiral">
-  <div class="spiral-parallax-bg"></div>
-  <div class="spiral-inner">
 
-    <!-- Col 1: Animated SVG -->
+  <!-- Top label -->
+  <div class="spiral-header rv">
+    <div class="orn">
+      <div class="orn-line"></div>
+      <span class="orn-sym">✦</span>
+      <div class="orn-line"></div>
+    </div>
+    <span class="label">The Spiral of Synthesis™</span>
+  </div>
+
+  <!-- 3-column stage -->
+  <div class="spiral-stage">
+
+    <!-- LEFT: principles 1 + 2 -->
+    <div class="spiral-left">
+      <div class="spiral-principle" id="sPrin0">
+        <div class="principle-num">01</div>
+        <div class="principle-name">Ancient Tantric<br>Wisdom</div>
+      </div>
+      <div class="spiral-principle" id="sPrin1">
+        <div class="principle-num">02</div>
+        <div class="principle-name">Transpersonal<br>Psychology</div>
+      </div>
+    </div>
+
+    <!-- CENTER: spiral SVG -->
     <div class="spiral-svg-wrap">
       <svg id="spiralSvg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
@@ -1078,56 +1101,49 @@
             <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
         </defs>
-        <path id="spiralPath" fill="none" stroke="#c4844a" stroke-width="1.3" stroke-linecap="round" opacity="0.9"/>
-        <circle class="spiral-node" id="sNode0" r="6" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease; pointer-events:all"/>
-        <circle class="spiral-node" id="sNode1" r="6" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease; pointer-events:all"/>
-        <circle class="spiral-node" id="sNode2" r="6" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease; pointer-events:all"/>
-        <circle class="spiral-node" id="sNode3" r="6" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease; pointer-events:all"/>
-        <circle class="spiral-node" id="sNode4" r="6" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease; pointer-events:all"/>
+        <path id="spiralPath" fill="none" stroke="#c4844a" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/>
+        <circle class="spiral-node" id="sNode0" r="6.5" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease"/>
+        <circle class="spiral-node" id="sNode1" r="6.5" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease"/>
+        <circle class="spiral-node" id="sNode2" r="6.5" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease"/>
+        <circle class="spiral-node" id="sNode3" r="6.5" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease"/>
+        <circle class="spiral-node" id="sNode4" r="6.5" fill="#c4844a" filter="url(#glow)" opacity="0" style="transition:opacity 0.5s ease"/>
       </svg>
-      <!-- Tooltips — positioned by JS -->
-      <div class="spiral-tip" id="sTip0"><div class="spiral-tip-inner">Ancient Tantric Wisdom</div></div>
-      <div class="spiral-tip" id="sTip1"><div class="spiral-tip-inner">Transpersonal Psychology</div></div>
-      <div class="spiral-tip" id="sTip2"><div class="spiral-tip-inner">Somatic Intelligence</div></div>
-      <div class="spiral-tip" id="sTip3"><div class="spiral-tip-inner">Feminine Embodiment</div></div>
-      <div class="spiral-tip" id="sTip4"><div class="spiral-tip-inner">Multidimensional Consciousness</div></div>
     </div>
 
-    <!-- Col 2: Content -->
-    <div class="spiral-content rv rv-d1">
-      <div class="orn">
-        <div class="orn-line"></div>
-        <span class="orn-sym">✦</span>
+    <!-- RIGHT: principles 3, 4, 5 -->
+    <div class="spiral-right">
+      <div class="spiral-principle" id="sPrin2">
+        <div class="principle-num">03</div>
+        <div class="principle-name">Somatic<br>Intelligence</div>
       </div>
-      <span class="label">The Spiral of Synthesis™</span>
-      <h2 class="spiral-h2">
-        A Living Path of
-        <em>Awakening</em>
-      </h2>
-      <ul class="spiral-elements">
-        <li class="spiral-elem" id="sElem0"><span class="elem-dot"></span><span class="elem-name">Ancient Tantric Wisdom</span></li>
-        <li class="spiral-elem" id="sElem1"><span class="elem-dot"></span><span class="elem-name">Transpersonal Psychology</span></li>
-        <li class="spiral-elem" id="sElem2"><span class="elem-dot"></span><span class="elem-name">Somatic Intelligence</span></li>
-        <li class="spiral-elem" id="sElem3"><span class="elem-dot"></span><span class="elem-name">Feminine Embodiment</span></li>
-        <li class="spiral-elem" id="sElem4"><span class="elem-dot"></span><span class="elem-name">Multidimensional Consciousness</span></li>
-      </ul>
-      <div class="spiral-pillars">
-        <div class="spiral-pillar" id="sPillar0">
-          <span class="pillar-num">I</span>
-          <span class="pillar-name">Relationship</span>
-        </div>
-        <div class="spiral-pillar" id="sPillar1">
-          <span class="pillar-num">II</span>
-          <span class="pillar-name">Intimacy</span>
-        </div>
-        <div class="spiral-pillar" id="sPillar2">
-          <span class="pillar-num">III</span>
-          <span class="pillar-name">Feminine Leadership</span>
-        </div>
+      <div class="spiral-principle" id="sPrin3">
+        <div class="principle-num">04</div>
+        <div class="principle-name">Feminine<br>Embodiment</div>
+      </div>
+      <div class="spiral-principle" id="sPrin4">
+        <div class="principle-num">05</div>
+        <div class="principle-name">Multidimensional<br>Consciousness</div>
       </div>
     </div>
 
   </div>
+
+  <!-- Pillars row -->
+  <div class="spiral-pillars">
+    <div class="spiral-pillar" id="sPillar0">
+      <span class="pillar-num">I</span>
+      <span class="pillar-name">Relationship</span>
+    </div>
+    <div class="spiral-pillar" id="sPillar1">
+      <span class="pillar-num">II</span>
+      <span class="pillar-name">Intimacy</span>
+    </div>
+    <div class="spiral-pillar" id="sPillar2">
+      <span class="pillar-num">III</span>
+      <span class="pillar-name">Feminine Leadership</span>
+    </div>
+  </div>
+
 </section>
 
 
@@ -1690,17 +1706,14 @@
   (function(){
     const pathEl  = document.getElementById('spiralPath');
     const nodes   = Array.from({length:5}, (_,i) => document.getElementById('sNode'+i));
-    const tips    = Array.from({length:5}, (_,i) => document.getElementById('sTip'+i));
-    const elems   = Array.from({length:5}, (_,i) => document.getElementById('sElem'+i));
+    const prins   = Array.from({length:5}, (_,i) => document.getElementById('sPrin'+i));
     const pillars = Array.from({length:3}, (_,i) => document.getElementById('sPillar'+i));
-    const wrap    = document.querySelector('.spiral-svg-wrap');
-    const svgEl   = document.getElementById('spiralSvg');
 
-    // Generate Archimedean spiral — 2.8 turns, starting at center
-    const cx=300, cy=300, turns=2.8, maxR=232, steps=900;
+    // Archimedean spiral: 2.8 turns from center outward
+    const cx=300, cy=300, turns=2.8, maxR=234, steps=900;
     const b = maxR / (turns * 2 * Math.PI);
-    // 5 nodes evenly placed from turn 0.55 onward (inner turns are too tight for hover)
-    const nodeTargets = [0.20, 0.38, 0.56, 0.75, 1.00];
+    // Node trigger points evenly spread along the spiral progress
+    const nodeTargets = [0.20, 0.40, 0.58, 0.76, 1.00];
     const nodePoints  = new Array(5).fill(null);
     let d = '';
 
@@ -1724,21 +1737,7 @@
       }
     });
 
-    // Position tooltips relative to svg-wrap using viewBox → pixel mapping
-    function positionTips() {
-      const ww = wrap.offsetWidth;
-      const wh = wrap.offsetHeight;
-      nodePoints.forEach((pt, i) => {
-        if (!pt) return;
-        const px = (pt.x / 600) * ww;
-        const py = (pt.y / 600) * wh;
-        tips[i].style.left = px + 'px';
-        tips[i].style.top  = (py - 42) + 'px';
-        tips[i].style.transform = 'translateX(-50%)';
-      });
-    }
-
-    // Draw animation
+    // Draw animation setup
     const total = pathEl.getTotalLength();
     pathEl.style.strokeDasharray  = total;
     pathEl.style.strokeDashoffset = total;
@@ -1748,53 +1747,32 @@
       if (entries[0].isIntersecting && !animated) {
         animated = true;
         spiralObs.disconnect();
-        positionTips();
         runSpiral();
       }
-    }, {threshold: 0.25});
+    }, {threshold: 0.2});
     spiralObs.observe(document.getElementById('spiral'));
 
-    window.addEventListener('resize', positionTips);
-
     function runSpiral() {
-      const dur = 4400;
+      const dur = 4600; // ms to complete full draw
       const start = performance.now();
       function frame(now) {
         const raw = Math.min((now - start) / dur, 1);
-        // ease in-out cubic
+        // ease-in-out cubic
         const p = raw < 0.5 ? 4*raw*raw*raw : 1 - Math.pow(-2*raw+2,3)/2;
         pathEl.style.strokeDashoffset = total * (1 - p);
+
         nodeTargets.forEach((nt, i) => {
           if (p >= nt) {
             nodes[i].style.opacity = '1';
-            elems[i].classList.add('lit');
-            if (i < 3) pillars[i].classList.add('lit');
+            prins[i].classList.add('revealed');         // big text appears on side
+            if (i < 3) pillars[i].classList.add('lit'); // pillar lights when its element appears
           }
         });
+
         if (raw < 1) requestAnimationFrame(frame);
       }
       requestAnimationFrame(frame);
     }
-
-    // Hover: node ↔ list item cross-highlight + tooltip
-    function activateIndex(i) {
-      elems.forEach(e => e.classList.remove('active'));
-      tips.forEach(t  => t.classList.remove('show'));
-      if (i !== null) {
-        elems[i].classList.add('active');
-        tips[i].classList.add('show');
-      }
-    }
-
-    nodes.forEach((node, i) => {
-      node.addEventListener('mouseenter', () => activateIndex(i));
-      node.addEventListener('mouseleave', () => activateIndex(null));
-    });
-
-    elems.forEach((el, i) => {
-      el.addEventListener('mouseenter', () => activateIndex(i));
-      el.addEventListener('mouseleave', () => activateIndex(null));
-    });
   })();
 </script>
 
